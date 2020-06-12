@@ -18,6 +18,8 @@ import EditIcon from "@material-ui/icons/Edit";
 import { makeStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
+import { useRouteMatch } from "react-router";
+import { ICollectionViewerRouteParams } from "../CollectionViewer";
 
 export interface ILayoutProps {
   menu: React.ReactNode;
@@ -141,6 +143,9 @@ const useStyles = makeStyles(theme => ({
     height: "100vh",
     overflow: "auto",
   },
+  buttonLink: {
+    color: "inherit",
+  },
 }));
 
 const Layout: React.FC<ILayoutProps> = ({ menu, page }) => {
@@ -186,6 +191,9 @@ function Header({
   showMenuIcon = false,
   onMenuIconClick = () => {},
 }: IHeaderProps) {
+  const match = useRouteMatch<ICollectionViewerRouteParams>("/collections/view/:slug");
+  const slug = match?.params?.slug;
+
   const classes = useStyles();
 
   return (
@@ -204,14 +212,16 @@ function Header({
             <MenuIcon />
           </IconButton>
         )}
-        <IconButton color="inherit">
-          <EditIcon />
-        </IconButton>
+        <Link to={`/collections/edit/${slug}`} className={classes.buttonLink}>
+          <IconButton color="inherit">
+            <EditIcon />
+          </IconButton>
+        </Link>
         <Typography component="h1" variant="h6" color="inherit" className={classes.title}>
           Page Title
         </Typography>
         <div className={classes.search}>
-          <div className={classes.searchIcon}>
+          <div className={classNames(classes.searchIcon)}>
             <SearchIcon />
           </div>
           <InputBase
@@ -223,9 +233,11 @@ function Header({
             inputProps={{ "aria-label": "search" }}
           />
         </div>
-        <IconButton color="inherit">
-          <SettingsIcon />
-        </IconButton>
+        <Link to="/settings" className={classes.buttonLink}>
+          <IconButton color="inherit">
+            <SettingsIcon />
+          </IconButton>
+        </Link>
       </Toolbar>
     </AppBar>
   );

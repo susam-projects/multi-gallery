@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core";
 import theme from "./theme";
-import Main from "./Main/Main";
+import Main from "./Main";
 
 function App() {
   return (

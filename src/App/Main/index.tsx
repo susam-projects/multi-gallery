@@ -7,10 +7,13 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PeopleIcon from "@material-ui/icons/People";
 import AddIcon from "@material-ui/icons/Add";
 import Layout from "./Layout";
-import { NavLink } from "react-router-dom";
-import { easing, List } from "@material-ui/core";
+import { Link, NavLink } from "react-router-dom";
+import { List } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import transitions from "@material-ui/core/styles/transitions";
+import HomePage from "../Home";
+import CollectionEditorPage from "../CollectionEditor";
+import SettingsPage from "../Settings";
+import CollectionViewerPage from "../CollectionViewer";
 
 const useStyles = makeStyles(theme => ({
   link: {
@@ -40,30 +43,42 @@ function Main() {
     <Layout
       menu={
         <List component="div">
-          <PseudoMenuItem />
-          <NavLink to="/first-page" className={styles.link} activeClassName={styles.activeLink}>
+          <Link to="/collections/create">
+            <PseudoMenuItem />
+          </Link>
+          <NavLink
+            to="/collections/view/test-col-1"
+            className={styles.link}
+            activeClassName={styles.activeLink}
+          >
             <ListItem className={styles.listItem} component="div">
               <ListItemIcon className={styles.icon}>
                 <ShoppingCartIcon />
               </ListItemIcon>
-              <ListItemText primary="First Page" />
+              <ListItemText primary="Test-Col 1" />
             </ListItem>
           </NavLink>
-          <NavLink to="/second-page" className={styles.link} activeClassName={styles.activeLink}>
+          <NavLink
+            to="/collections/view/test-col-2"
+            className={styles.link}
+            activeClassName={styles.activeLink}
+          >
             <ListItem className={styles.listItem}>
               <ListItemIcon className={styles.icon}>
                 <PeopleIcon />
               </ListItemIcon>
-              <ListItemText primary="Second Page" />
+              <ListItemText primary="Test-Col 2" />
             </ListItem>
           </NavLink>
         </List>
       }
       page={
         <Switch>
-          <Route component={MainPage} path="/" exact />
-          <Route component={FirstPage} path="/first-page" exact />
-          <Route component={SecondPage} path="/second-page" exact />
+          <Route component={HomePage} path="/" exact />
+          <Route component={CollectionEditorPage} path="/collections/create" exact />
+          <Route component={CollectionEditorPage} path="/collections/edit/:slug" exact />
+          <Route component={CollectionViewerPage} path="/collections/view/:slug" exact />
+          <Route component={SettingsPage} path="/settings" exact />
           <Redirect to="/" />
         </Switch>
       }
