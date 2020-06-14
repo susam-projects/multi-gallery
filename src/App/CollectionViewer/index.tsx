@@ -3,6 +3,7 @@ import { useRouteMatch } from "react-router";
 // @ts-ignore
 import StackGrid from "react-stack-grid";
 import "react-image-gallery/styles/css/image-gallery.css";
+import "./image-viewer.css";
 import ImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
 import { makeStyles } from "@material-ui/core/styles";
 import { useWidth } from "../theme";
@@ -154,7 +155,7 @@ const ImageViewer: React.FC<IImageViewerProps> = ({
       items={imageItems}
       startIndex={selectedImage}
       lazyLoad
-      thumbnailPosition="bottom"
+      thumbnailPosition="left"
       onScreenChange={handleScreenChange}
       ref={getGalleryRef}
     />
