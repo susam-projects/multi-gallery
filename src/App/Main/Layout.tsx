@@ -20,6 +20,7 @@ import classNames from "classnames";
 import { Link } from "react-router-dom";
 import { useRouteMatch } from "react-router";
 import { ICollectionViewerRouteParams } from "../CollectionViewer";
+import logo from "../Logo/logo-via-logohub-6.png";
 
 export interface ILayoutProps {
   menu: React.ReactNode;
@@ -134,8 +135,13 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     alignItems: "center",
     marginLeft: 16,
+    marginRight: 10,
     color: "#0000008A",
     textDecoration: "none",
+
+    "& img": {
+      maxWidth: "100%",
+    },
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
@@ -249,6 +255,7 @@ interface IDrawerProps {
 
 const WideScreenDrawer: React.FC<IDrawerProps> = ({ menu }) => {
   const classes = useStyles();
+
   return (
     <nav className={classes.drawerWrapper}>
       <Drawer
@@ -259,9 +266,7 @@ const WideScreenDrawer: React.FC<IDrawerProps> = ({ menu }) => {
         }}
       >
         <Link to="/" className={classes.logo}>
-          <Typography variant="h6" color="inherit">
-            Multi Gallery
-          </Typography>
+          <img style={{ maxWidth: "100%" }} src={logo} alt="MultiGallery" />
         </Link>
         <Divider />
         {menu}
@@ -298,9 +303,7 @@ const NarrowScreenDrawer: React.FC<INarrowScreenDrawerProps> = ({ menu, isOpen, 
         }}
       >
         <Link to="/" className={classes.logo}>
-          <Typography variant="h6" color="inherit">
-            Multi Gallery
-          </Typography>
+          <img style={{ maxWidth: "100%" }} src={logo} alt="MultiGallery" />
         </Link>
         <Divider />
         {menu}
