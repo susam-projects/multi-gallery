@@ -119,8 +119,4 @@ const PseudoMenuItem: React.FC<IPseudoMenuItem> = ({ onClick = () => {} }) => {
   );
 };
 
-const MainPage: React.FC = () => <div>App</div>;
-const FirstPage: React.FC = () => <div>First Page</div>;
-const SecondPage: React.FC = () => <div>Second Page</div>;
-
 export default Main;
