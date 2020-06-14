@@ -5,6 +5,8 @@ import StackGrid from "react-stack-grid";
 import "react-image-gallery/styles/css/image-gallery.css";
 import ImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
 import { makeStyles } from "@material-ui/core/styles";
+import { useWidth } from "../theme";
+import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
 
 import img1 from "./TestImages/analysis-blackboard-board-bubble-355952.jpg";
 import img2 from "./TestImages/ask-blackboard-chalk-board-chalkboard-356079.jpg";
@@ -70,10 +72,20 @@ function CollectionViewerPage() {
     setIsSlideShow(false);
   }, []);
 
+  const width = useWidth();
+  const COLUMNS_COUNT: Record<Breakpoint, number> = {
+    xs: 1,
+    sm: 2,
+    md: 3,
+    lg: 4,
+    xl: 5,
+  };
+  const columnWidth = `${Math.floor(100 / COLUMNS_COUNT[width])}%`;
+
   return (
     <div className={styles.root}>
       {!isSlideShow && (
-        <StackGrid columnWidth={250} monitorImagesLoaded gutterWidth={5} gutterHeight={0}>
+        <StackGrid columnWidth={columnWidth} monitorImagesLoaded gutterWidth={5} gutterHeight={0}>
           {photos.map((src, i) => (
             <Image key={src} src={src} name={src} onClick={() => handleImageClick(i)} />
           ))}
